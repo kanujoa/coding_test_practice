@@ -3,3 +3,22 @@
 # 반대의 경우 반대 리스트의 숫자가 들어감.
 # ex) p1이 끝났을 경우 b 리스트의 남은 숫자들을 모두 붙여버리면 됨.
 
+n = int(input())
+a = list(map(int, input().split()))
+m = int(input())
+b = list(map(int, input().split()))
+p1 = p2 = 0     # 이렇게 한줄로 적어줄 수도 있다.
+c = []
+while p1 < n and p2 < m:
+  if a[p1] <= b[p2]:
+    c.append(a[p1])
+    p1 += 1
+  else:
+    c.append(b[p2])
+    p2 += 1
+if p1 < n:
+  c = c + a[p1:]
+if p2 < m:
+  c = c + b[p2:]
+for x in c:
+  print(x, end=" ")
