@@ -25,5 +25,5 @@ console.log(solution(["3 - 4 = -3", "5 + 6 = 11"]));
 //       const sign = calc.includes('+') ? 1 : -1     --> 계산식 부분인 calc가 +를 포함하고 있다면 1을, 아니면(-를 포함하고 있다면) -1을 반환함.
 //       const [a, b] = calc.split(sign === 1 ? ' + ' : ' - ');     --> 위에서 반환되어 sign에 저장된 수가 1이면 ' + '를, 아니면 ' - '를 기준으로 계산식인 calc를 나누어 리스트에 담음. 그리고 그것을 구조분해할당함.
 //       return +a + (+b * sign) === +result ? 'O' : 'X'     --> 진짜 계산 결과인 a + (b * sign)이 quiz에서의 result와 같다면 'O'를, 아니면 'X'를 반환함.
-//   });
+//   });     --> +a, +b, +result는 number type으로 변환하기 위한 코드이다.
 // }
