@@ -1,17 +1,19 @@
 def solution(s):
-    while True:
-        length = len(s)
-        prev = ''
+    while s != '':
+        s = [letter for letter in s]
+        prv = ''
         for i in range(len(s)):
-            if s[i] == prev:
-                s = s.replace(s[i], '', 2)
-                break
+            if s[i] == prv:
+                s[i] = ''
+                s[i-1] = ''
             else:
-                prev = s[i]
-        if len(s) == 0:
-            return 1
-        elif len(s) == length:
-            return 0
+                prv = s[i]
+        if '' not in s:
+            break
+        s = ''.join(s)
+    if len(s) == 0:
+        return 1
+    return 0    
         
         
 print(solution("baabaa"))
