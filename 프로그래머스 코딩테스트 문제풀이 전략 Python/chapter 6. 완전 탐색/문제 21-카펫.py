@@ -4,7 +4,7 @@
 
 def solution(brown, yellow):
     total_area = brown + yellow
-    for height in range(2, total_area):
+    for height in range(2, total_area):     # brown은 항상 테두리만 가능하고, yellow는 항상 내부만 가능하므로 정확히는 height는 3부터 탐색해야 한다.
         width  = total_area // height
         if (width - 2) * (height - 2) == yellow:
             return [width, height]
