@@ -11,10 +11,21 @@
 # 문제에서 요구한 바와 같이 1, 2, 3 순서로 출력되게 하고 싶다면 아래와 같이 순서를 바꾸어 주면 됨.
 # 아래와 같이 작성 시 DFS 함수를 먼저 실행하고 print를 실행하지 않았으므로 스택에 남게 되고 후입선출에 따라 출력되므로 1, 2, 3 순서로 출력 가능
 
-def DFS(x):
+def DFS1(x):
     if x > 0:
-        DFS(x-1)
+        print(x, end=' ')
+        DFS1(x - 1)
+
+def DFS2(x):
+    if x > 0:
+        DFS2(x - 1)
         print(x, end=' ')
 
-n = int(input())
-DFS(n)     # DFS는 깊이 우선 탐색이라는 의미
+def main():
+    n = int(input())
+    DFS1(n)     # DFS는 깊이 우선 탐색이라는 의미
+    # 결과: 3 2 1
+    DFS2(n)     
+    # 결과: 1 2 3
+
+main()
