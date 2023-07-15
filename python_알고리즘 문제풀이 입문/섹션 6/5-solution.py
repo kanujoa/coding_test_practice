@@ -1,6 +1,6 @@
 def DFS(L, _sum, tsum):     # a 리스트에 접근하기 위한 index 번호, 부분집합의 합, 현재까지 판단을 했던 무게들 (트럭에 태우든 태우지 않든)
     global result     # 바깥에 있는 (전역변수의) result를 사용하는 것이라고 알려주어야 한다.
-    if _sum + (total - _sum) < result:     # total-_sum은 지금까지 탐색했던 바둑이 무게 다음으로 남아 있는 바둑이 무게들의 합     
+    if _sum + (total - tsum) < result:     # total-_sum은 지금까지 탐색했던 바둑이 무게 다음으로 남아 있는 바둑이 무게들의 합     
         return     # 지금까지 선택한 바둑이들의 무게 합에 total-sum을 더한 것이 result보다 작다면 더 이상 살펴볼 필요가 없다.     
     if _sum > c:     # _sum이 무게제한인 c를 넘으면 안되므로 
         return      # 아무것도 하지 않고 종료해야 함.

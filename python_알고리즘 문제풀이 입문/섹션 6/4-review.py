@@ -1,27 +1,16 @@
-# 하나의 부분집합이 완성되면 그 집합의 여집합과 합이 같은지 비교하면 효율적으로 비교할 수 있다!
-# (비교 과정을 반만 거쳐도 되기 때문!)
-
-def DFS(v, comparision):
-    if v == n:
-        subset_sum = 0
-        for i in range(len(ch)):
-            if ch[i] == 1:
-                subset_sum += elements[i]
-        if subset_sum == sum(elements) - subset_sum:
-            print("YES")
-            exit()
-        comparision += 1
-        if comparision > n ** 2 // 2:
-            exit()
+def DFS(i, _sum):     # elements에서 사용할 인덱스와 포함할 원소를 누적할 _sum이 인자로 들어감
+    if _sum > total_sum // 2:     # 현재까지 포함된 원소들의 합이 모든 원소의 합의 절반보다 클 경우
+        return     # 과정 종료
+    elif i == n:     # 모든 원소들을 다 돌고,
+        if _sum == (total_sum - _sum):     # 뽑은 원소들의 합이 나머지 원소들의 합과 같은 경우
+            print("Yes")     # Yes 출력 후
+            exit()     # 프로그램 자체를 종료
     else:
-        ch[v] = 1
-        DFS(v + 1, comparision)
-        ch[v] = 0
-        DFS(v + 1, comparision)
+        DFS(i + 1, _sum + elements[i])     # 현재 i번째 원소를 포함하는 경우 
+        DFS(i + 1, _sum)     # 현재 i번째 원소를 포함하지 않는 경우
 
-n = int(input())
-elements = list(map(int, input().split()))
-ch = [0] * n
-comparision = 0
-DFS(0, 0)
-print("NO")
+n = int(input())     # 집합의 원소의 개수
+elements = list(map(int, input().split()))     # 집합을 이루는 원소들
+total_sum = sum(elements)     # 전체 원소의 합
+DFS(0, 0)     # 인덱스는 0부터 하나씩 증가, 원소의 합도 0으로 초기화
+print("No")     # 위 DFS 함수에서 프로그램 종료(exit())가 이루어지지 않은 경우 실행됨

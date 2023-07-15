@@ -1,19 +1,29 @@
-def DFS(L, _sum, tsum):     # a 리스트에 접근하기 위한 index 번호, 부분집합의 합, 현재까지 판단을 했던 무게들 (트럭에 태우든 태우지 않든)
-    global result     # 바깥에 있는 (전역변수의) result를 사용하는 것이라고 알려주어야 한다.
-    if _sum + (total - _sum) < result:     # total-_sum은 지금까지 탐색했던 바둑이 무게 다음으로 남아 있는 바둑이 무게들의 합     
-        return     # 지금까지 선택한 바둑이들의 무게 합에 total-sum을 더한 것이 result보다 작다면 더 이상 살펴볼 필요가 없다.     
-    if _sum > c:     # _sum이 무게제한인 c를 넘으면 안되므로 
-        return      # 아무것도 하지 않고 종료해야 함.
-    if L == n:     # 말단 노드에 도착했다는 의미
-        if _sum > result:
-            result = _sum
+# i : w 리스트에 접근하기 위한 index
+# _sum : 현재까지 승차한 바둑이들의 무게 합
+# total_sum : 현재 승차한 바둑이의 바로 뒤 순서부터 모든 바둑이 무게의 합
+def DFS(i, _sum, total_sum):    
+    global answer
+    # 앞으로 포함될 가능성이 있는 바둑이들의 무게들을 모두 현재 _sum에 더했을 때 현재까지의 최대 무게보다 적으면 더 살펴볼 필요 X
+    if _sum + (total - total_sum) < answer:     
+        return
+    # 현재 승차한 바둑이들의 무게가 제한을 넘을 경우
+    elif _sum > c:     
+        return
+    # 마지막 무게까지 다 돌았을 경우 (트리에서 말단 노드에 도착하였을 때)
+    elif i == n:     
+        # 바둑이 무게의 합이 현재 탑승 가능 최대 무게보다 더 클 경우
+        if _sum > answer:
+            answer = _sum
     else:
-        DFS(L+1, _sum+a[L], tsum+a[L])     # 인덱스와 무게의 합 증가시키기 (a 리스트의 L번째 원소를 부분집합으로 참여)
-        DFS(L+1, _sum, tsum+a[L])     # _sum을 그대로 넣어주면 a 리스트의 L번째 원소를 부분집합으로 참여시키지 X
+        # 현재 순서의 바둑이를 승차시킬 경우
+        DFS(i + 1, _sum + w[i], total_sum + w[i])
+        # 현재 순서의 바둑이를 승차시키지 않을 경우
+        DFS(i + 1, _sum, total_sum + w[i])
+        
 
-c, n = map(int, input().split())
-a = [int(input()) for _ in range(n)]     # 각각의 바둑이의 무게를 담은 리스트
-result = -2147000000
-total = sum(a)
+c, n = map(int, input().split())     # c : 트럭에 태울 수 있는 최대 무게, n : 철수가 데리고 있는 바둑이들의 수
+w = [int(input()) for _ in range(n)]     # 바둑이들의 무게
+answer = 0     # 철수가 트럭에 태울 수 있는 가장 무거운 무게
+total = sum(w)     # 모든 바둑이들의 무게
 DFS(0, 0, 0)
-print(result)
+print(answer)
