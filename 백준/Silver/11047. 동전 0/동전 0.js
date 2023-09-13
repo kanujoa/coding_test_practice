@@ -27,7 +27,7 @@ for (let i = n - 1; i >= 0; i--) {
   // k를 현재 동전 단위로 나눈 몫만큼이 필요한 동전 개수에 포함됨.
   need += Math.floor(k / coins[i]);
   // 이미 만든 부분은 제외해야 하므로 k에서 이미 만든 값은 빼주기
-  k -= coins[i] * Math.floor(k / coins[i]);
+  k %= coins[i];
 }
 
 console.log(need);
